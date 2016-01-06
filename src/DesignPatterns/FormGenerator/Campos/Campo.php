@@ -1,10 +1,13 @@
 <?php
-class CampoButton {
+
+namespace DesignPatterns\FormGenerator\Campos;
+
+abstract class Campo implements \DesignPatterns\FormGenerator\Campos\CampoInterface{
     private $name;
     private $id;
     private $value;
     private $label;
-    
+
     function getLabel() {
         return $this->label;
     }
@@ -14,7 +17,7 @@ class CampoButton {
         return $this;
     }
 
-        function getName() {
+    function getName() {
         return $this->name;
     }
 
@@ -41,13 +44,6 @@ class CampoButton {
         return $this;
     }
     
-    function render(){
-        $html ="<div class='col-lg-3'>";
-        $html .="<button type='submit' id='{$this->id}' name='{$this->name}' value='{$this->value}' class='form-control'>{$this->label}</input>";
-        $html .="</div>";
-        
-        return $html;
-    }
-
+    abstract function render();
 
 }

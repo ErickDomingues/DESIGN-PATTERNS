@@ -1,10 +1,18 @@
 <?php
 
+namespace DesignPatterns\FormGenerator;
+
+use DesignPatterns\FormGenerator\Campos\CampoInterface;
+
 class Formulario {
 
     private $metodo;
     private $name;
     private $campos = array();
+    
+    public function __construct(Validator $validador) {
+        
+    }
 
     function getMetodo() {
         return $this->metodo;
@@ -28,19 +36,24 @@ class Formulario {
         return $this;
     }
 
-    function addCampo($campo) {
-        $this->campos = array_merge($this->campos, array($campo));
+    function addCampo($id,  CampoInterface $campo) {
+        $this->campos[$id] = array_merge($this->campos, array($campo));
         return $this;
+    }
+    
+    function createField($id){
+            echo $this->campos[$id][0]->render();
     }
 
     function render() {
-        $html  ="<form method='{$this->metodo}' name='{$this->name}' >";
+        $html  ="<form method='{$this->metodo}' name='{$this->name}' ><fieldset>";
         foreach ($this->campos as $value) {
-            $html .=$value->render();
+            $html .=$value[0]->render();
         }
-        $html .= "</form>";
+        $html .= "</fieldset></form>";
 
         echo $html;
     }
+    
 
 }
