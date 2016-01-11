@@ -46,11 +46,11 @@ class Formulario {
     }
 
     function render() {
-        $html  ="<form method='{$this->metodo}' name='{$this->name}' ><fieldset>";
+        $html  ="<div class='col-sm-6'><div class='thumbnail'><form method='{$this->metodo}' name='{$this->name}' ><fieldset>";
         foreach ($this->campos as $value) {
             $html .=$value[0]->render();
         }
-        $html .= "</fieldset></form>";
+        $html .= "</fieldset></form></div></div>";
 
         echo $html;
     }
